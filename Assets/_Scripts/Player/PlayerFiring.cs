@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerFiring : MonoBehaviour
 {
+    public List<BasePowerUp> bulletUpgrades = new List<BasePowerUp>();
+
     [SerializeField] 
     private Transform firingPoint;
     [SerializeField] 
@@ -22,14 +24,19 @@ public class PlayerFiring : MonoBehaviour
     private void OnEnable() { TimeStop.customTimeScale += UpdateCustomTime; }
     private void OnDisable() { TimeStop.customTimeScale -= UpdateCustomTime; }
 
+    private void UpdateCustomTime(float incomingTimeScale)
+    {
+        customTimeScale = incomingTimeScale;
+    }
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void UpdateCustomTime(float incomingTimeScale)
+    private void Start()
     {
-        customTimeScale = incomingTimeScale;
+        bulletUpgrades.Clear();
     }
 
     private void Update()
@@ -56,6 +63,12 @@ public class PlayerFiring : MonoBehaviour
 
         bullet.GetComponent<BulletScript>().customTimeScale = customTimeScale;
 
-        player.GetComponent<UpgradeInventory>().ApplyUpgradesTo(bullet);
+        foreach (BasePowerUp upgrade in bulletUpgrades)
+        {
+            if (upgrade.ReturnType() == PowerUpType.BULLET)
+            {
+                upgrade.ApplyPowerUp(bullet);
+            }
+        }
     }
 }

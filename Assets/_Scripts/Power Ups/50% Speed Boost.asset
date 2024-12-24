@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34694ed808c7cd47a385c60c85b401b, type: 3}
   m_Name: 50% Speed Boost
   m_EditorClassIdentifier: 
-  percentageSpeedIncrease: 0.5
+  speedIncrease: 0.5

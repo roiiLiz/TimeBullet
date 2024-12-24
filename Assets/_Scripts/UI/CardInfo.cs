@@ -19,6 +19,13 @@ public class CardInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public static event Action selectedCard;
 
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     public void SetCard(Sprite incomingImage, string incomingTitle, string incomingDescription, BasePowerUp incomingAbility)
     {
         cardImage.sprite = incomingImage;
@@ -29,7 +36,26 @@ public class CardInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void ApplyPowerUp()
     {
-        cardAbility.AddToList(cardAbility);
+        PowerUpType abilityPower = cardAbility.ReturnType();
+
+        switch(abilityPower)
+        {
+            case PowerUpType.MOVEMENT:
+                cardAbility.ApplyPowerUp(player);
+                break;
+            case PowerUpType.BULLET:
+                player.GetComponent<PlayerFiring>().bulletUpgrades.Add(cardAbility);
+                break;
+            case PowerUpType.TIME:
+                break;
+            case PowerUpType.HEALTH:
+                break;
+            case PowerUpType.META:
+                break;
+            default:
+                break;
+        }
+
         selectedCard?.Invoke();
     }
 
