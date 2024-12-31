@@ -9,12 +9,12 @@ public class WaveManager : MonoBehaviour
 
     private void OnEnable() 
     { 
-        EnemyScript.enemyDeath += CheckEnemyCount;
+        Enemy.enemyDeath += CheckEnemyCount;
         WaveSpawner.enemySpawned += IncrementEnemyCount;
     }
     private void OnDisable() 
     { 
-        EnemyScript.enemyDeath -= CheckEnemyCount;
+        Enemy.enemyDeath -= CheckEnemyCount;
         WaveSpawner.enemySpawned -= IncrementEnemyCount;
     }
 
@@ -23,14 +23,17 @@ public class WaveManager : MonoBehaviour
     private void IncrementEnemyCount()
     {
         enemyCount++;
+        Debug.Log($"Current enemy count: {enemyCount}");
     }
 
     private void CheckEnemyCount()
     {
+        Debug.Log($"Enemy destroyed, current enemy count: {enemyCount}");
         enemyCount--;
 
         if (enemyCount <= 0)
         {
+            Debug.Log("Starting next wave");
             startNextWave?.Invoke();
         }
     }

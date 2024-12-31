@@ -29,8 +29,8 @@ public class TimeStop : MonoBehaviour
     float internalCooldown;
     TimeState currentTimeState = TimeState.Idle;
 
-    void OnEnable() { EnemyScript.requestTime += ReturnTime; }
-    void OnDisable() { EnemyScript.requestTime -= ReturnTime; }
+    void OnEnable() { Enemy.requestTime += ReturnTime; }
+    void OnDisable() { Enemy.requestTime -= ReturnTime; }
 
     void Start()
     {

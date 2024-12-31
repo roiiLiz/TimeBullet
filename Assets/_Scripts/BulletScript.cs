@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField]
+    private BulletType bulletType;
     public float bulletMovementSpeed = 20f;
     public int bulletDamage = 2;
     public int maxPierce = 1;
@@ -14,6 +16,8 @@ public class BulletScript : MonoBehaviour
     public float customTimeScale;
     private float internalBulletTime;
 
+    private enum BulletType { Player, Enemy }
+
     private void OnEnable() { TimeStop.customTimeScale += UpdateCustomTime; }
     private void OnDisable() { TimeStop.customTimeScale -= UpdateCustomTime; }
 
@@ -21,7 +25,7 @@ public class BulletScript : MonoBehaviour
     {
         customTimeScale = incomingTimeScale;
     }
-    // Update is called once per frame
+
     private void Update()
     {
         transform.Translate(Vector2.right * bulletMovementSpeed * Time.deltaTime * customTimeScale);
@@ -47,17 +51,36 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        HealthComponent healthComponent = collision.GetComponent<HealthComponent>();
+        IDamagable healthComponent = collision.GetComponent<IDamagable>();
         
-        if (healthComponent != null && !collision.CompareTag("Player"))
+        switch (bulletType)
         {
-            collision.GetComponent<HealthComponent>().Damage(bulletDamage);
-            maxPierce--;
+            case BulletType.Player:
+                if (healthComponent != null && !collision.CompareTag("Player"))
+                {
+                    DealDamageTo(healthComponent);
+                }
+                break;
+            case BulletType.Enemy:
+                if (healthComponent != null && collision.CompareTag("Player"))
+                {
+                    DealDamageTo(healthComponent);
+                }
+                break;
+            default:
+                break;
+        }
 
-            if (maxPierce <= 0)
-            {
-                Destroy(gameObject);
-            }
+    }
+
+    private void DealDamageTo(IDamagable healthComponent)
+    {
+        healthComponent.TakeDamage(bulletDamage);
+        maxPierce--;
+
+        if (maxPierce <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
