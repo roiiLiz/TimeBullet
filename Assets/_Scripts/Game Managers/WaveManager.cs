@@ -9,12 +9,12 @@ public class WaveManager : MonoBehaviour
 
     private void OnEnable() 
     { 
-        Enemy.enemyDeath += CheckEnemyCount;
+        EnemyDeathComponent.enemyDeath += CheckEnemyCount;
         WaveSpawner.enemySpawned += IncrementEnemyCount;
     }
     private void OnDisable() 
     { 
-        Enemy.enemyDeath -= CheckEnemyCount;
+        EnemyDeathComponent.enemyDeath -= CheckEnemyCount;
         WaveSpawner.enemySpawned -= IncrementEnemyCount;
     }
 

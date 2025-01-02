@@ -14,8 +14,8 @@ public class ScoreText : MonoBehaviour
         text.text = $"Score: {score}";
     }
 
-    void OnEnable() { Enemy.enemyDeath += IncrementScore; }
-    void OnDisable() { Enemy.enemyDeath -= IncrementScore; }
+    void OnEnable() { EnemyDeathComponent.enemyDeath += IncrementScore; }
+    void OnDisable() { EnemyDeathComponent.enemyDeath -= IncrementScore; }
 
     private void IncrementScore()
     {

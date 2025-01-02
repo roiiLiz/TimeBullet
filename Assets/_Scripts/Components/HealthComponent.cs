@@ -1,39 +1,36 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField]
+    private int maxHealth = 10;
+    [SerializeField]
     private int currentHealth;
     [SerializeField]
-    private int maxHealth;
+    private DeathComponent deathComponent;
+    [SerializeField]
+    private DamageFlashComponent damageFlashComponent;
 
-    void Start()
+    public int MaxHealth { get { return maxHealth; }}
+    public int CurrentHealth { get { return currentHealth; }}
+
+    private void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public int CurrentHealth()
+    public void Damage(Attack attack)
     {
-        return currentHealth;
-    }
-
-    public int MaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public void Damage(int incomingDamage)
-    {
-        currentHealth -= incomingDamage;
-        Debug.Log($"{gameObject.name} took {incomingDamage} damage!");
+        currentHealth -= attack.damageAmount;
+        damageFlashComponent.BeginDamageFlash();
 
         if (currentHealth <= 0)
         {
-            Debug.Log($"{gameObject.name} Died!");
-            Destroy(gameObject);
+            if (deathComponent != null)
+            {
+                deathComponent.Die(this);
+            }
         }
     }
 }

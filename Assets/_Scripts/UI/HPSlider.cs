@@ -14,12 +14,12 @@ public class HPSlider : MonoBehaviour
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthComponent>();
 
-        slider.maxValue = playerHealth.MaxHealth();
-        slider.value = playerHealth.CurrentHealth();
+        slider.maxValue = playerHealth.MaxHealth;
+        slider.value = playerHealth.CurrentHealth;
     }
 
     private void Update()
     {
-        slider.value = playerHealth.CurrentHealth();
+        slider.value = playerHealth.CurrentHealth;
     }
 }

@@ -29,13 +29,14 @@ public class Enemy : MonoBehaviour, IDamagable, IEntityMoveable
     private void OnEnable() { TimeStop.customTimeScale += UpdateCustomTime; }
     private void OnDisable() { TimeStop.customTimeScale -= UpdateCustomTime; }
 
-#endregion
-#region "Time-Stop"
-
     private void Start()
     {
+        CurrentHealth = MaxHealth;
         requestTime?.Invoke();
     }
+
+#endregion
+#region "Time-Stop"
 
     private void UpdateCustomTime(float incomingTimeScale)
     {

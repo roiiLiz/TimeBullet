@@ -7,7 +7,7 @@ public class RangedEnemy : Enemy
     [SerializeField]
     private float attackRange = 10f;
     [SerializeField]
-    private int attacksPerSecond = 1;
+    private float attacksPerSecond = 1;
     [SerializeField]
     private GameObject gunPivot;
     [SerializeField]

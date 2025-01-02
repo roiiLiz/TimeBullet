@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3200164405364656755}
   - component: {fileID: -6214640129876520789}
   - component: {fileID: 8788754274917706736}
+  - component: {fileID: 5704206532694236220}
+  - component: {fileID: 3967823974046341044}
   m_Layer: 8
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -103,9 +105,9 @@ MonoBehaviour:
   expAmountOnDeath: 1
   <MaxHealth>k__BackingField: 5
   attackRange: 10
-  attacksPerSecond: 1
+  attacksPerSecond: 0.5
   gunPivot: {fileID: 8668161305778200841}
-  firingPoint: {fileID: 3676295517591537866}
+  firingPoint: {fileID: 3719884710511519955}
   bulletPrefab: {fileID: 3729570270518218062, guid: 0254f00ebe08b05448d9420c3237e2dd, type: 3}
 --- !u!58 &8788754274917706736
 CircleCollider2D:
@@ -142,6 +144,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &5704206532694236220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505680550595940018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4141d8a805d17545bbfeda62918014c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
+  deathComponent: {fileID: 11400000, guid: 3f986832deeb5fa4297111798b2e7884, type: 2}
+  damageFlashComponent: {fileID: 3967823974046341044}
+--- !u!114 &3967823974046341044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505680550595940018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2ea4e4306bc2241b360a0e87adec1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashTime: 0.35
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3588081629730390184
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +185,7 @@ GameObject:
   - component: {fileID: 3676295517591537866}
   - component: {fileID: 8480151280212949173}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,13 +199,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3588081629730390184}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5528160598199911474}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &8480151280212949173
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -226,6 +258,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4469057071737274536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3719884710511519955}
+  m_Layer: 8
+  m_Name: FiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3719884710511519955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469057071737274536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5528160598199911474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8668161305778200841
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +318,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3719884710511519955}
   - {fileID: 3676295517591537866}
   m_Father: {fileID: 634651991302775553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

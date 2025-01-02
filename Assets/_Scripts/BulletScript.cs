@@ -51,31 +51,29 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamagable healthComponent = collision.GetComponent<IDamagable>();
+        HealthComponent healthComponent = collision.GetComponent<HealthComponent>();
         
-        switch (bulletType)
-        {
-            case BulletType.Player:
-                if (healthComponent != null && !collision.CompareTag("Player"))
-                {
-                    DealDamageTo(healthComponent);
-                }
-                break;
-            case BulletType.Enemy:
-                if (healthComponent != null && collision.CompareTag("Player"))
-                {
-                    DealDamageTo(healthComponent);
-                }
-                break;
-            default:
-                break;
-        }
+        var bulletAttack = new Attack();
+        bulletAttack.damageAmount = bulletDamage;
 
+        if (bulletType == BulletType.Player)
+        {
+            if (healthComponent != null && !collision.CompareTag("Player"))
+                {
+                    DealDamageTo(healthComponent, bulletAttack);
+                }
+        } else if (bulletType == BulletType.Enemy)
+        {
+            if (healthComponent != null && collision.CompareTag("Player"))
+                {
+                    DealDamageTo(healthComponent, bulletAttack);
+                }
+        }
     }
 
-    private void DealDamageTo(IDamagable healthComponent)
+    private void DealDamageTo(HealthComponent healthComponent, Attack incomingAttack)
     {
-        healthComponent.TakeDamage(bulletDamage);
+        healthComponent.Damage(incomingAttack);
         maxPierce--;
 
         if (maxPierce <= 0)
