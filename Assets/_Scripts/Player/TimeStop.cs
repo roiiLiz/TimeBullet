@@ -20,7 +20,7 @@ public class TimeStop : MonoBehaviour
     public static event Action<float, float> abilityProgress;
     public static event Action<float, float> cooldownBegin; 
 
-    [SerializeField] float slowDownScale = 0.25f;
+    public float slowDownScale = 0.25f;
     [SerializeField] float defaultSpeed = 1f;
     [SerializeField] float powerDuration = 5f;
     [SerializeField] float powerCooldownTime = 2f;

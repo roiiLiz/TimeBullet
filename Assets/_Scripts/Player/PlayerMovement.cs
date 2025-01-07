@@ -22,8 +22,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        MovePlayer();
-        RotatePivot();
+        if (!PauseManager.instance.IsPaused)
+        {
+            MovePlayer();
+            RotatePivot();
+        }
     }
 
     private void MovePlayer()

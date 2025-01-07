@@ -41,17 +41,20 @@ public class PlayerFiring : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && canFire)
+        if (!PauseManager.instance.IsPaused)
         {
-            FireBullet();
-        }
+            if (Input.GetMouseButton(0) && canFire)
+            {
+                FireBullet();
+            }
 
-        internalDelay += Time.deltaTime;
+            internalDelay += Time.deltaTime;
 
-        if (internalDelay >= (1 / shotsPerSecond))
-        {
-            internalDelay = 0f;
-            canFire = true;
+            if (internalDelay >= (1 / shotsPerSecond))
+            {
+                internalDelay = 0f;
+                canFire = true;
+            }
         }
     }
 

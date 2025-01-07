@@ -19,8 +19,8 @@ public class PlayerEXP : MonoBehaviour
         return level * levelMultiplier;
     }
 
-    private void OnEnable() { Enemy.giveExp += AddExp; }
-    private void OnDisable() { Enemy.giveExp -= AddExp; }
+    private void OnEnable() { EnemyDeathComponent.giveExp += AddExp; }
+    private void OnDisable() { EnemyDeathComponent.giveExp -= AddExp; }
 
     private void Start()
     {
