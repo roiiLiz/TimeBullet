@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class UI_Button : MonoBehaviour
 {
+    public static event Action levelRetry;
+
     public void GoToLevel(String levelName)
     {
         if (levelName != null)
@@ -19,6 +21,14 @@ public class UI_Button : MonoBehaviour
     {
         Debug.Log("Exiting game");
         Application.Quit();
+    }
+
+    public void RetryLevel()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
+
+        levelRetry?.Invoke();
     }
 }
 

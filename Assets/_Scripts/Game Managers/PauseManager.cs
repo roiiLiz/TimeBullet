@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -8,6 +9,8 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject pauseParent;
 
     private bool isPaused = false;
     private float currentTimeScale = 1f;
@@ -47,6 +50,11 @@ public class PauseManager : MonoBehaviour
         } else
         {
             Time.timeScale = currentTimeScale;
+            foreach (Transform child in pauseParent.transform)
+            {
+                Debug.Log($"Current selection: {child.name}");
+                child.GameObject().SetActive(isPaused);
+            }
         }
 
         pauseMenu.SetActive(isPaused);

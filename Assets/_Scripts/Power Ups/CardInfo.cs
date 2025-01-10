@@ -16,6 +16,8 @@ public class CardInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private TextMeshProUGUI cardDescription;
     [SerializeField]
     private BasePowerUp cardAbility;
+    [SerializeField]
+    private bool selectable = true;
 
     public static event Action selectedCard;
 
@@ -33,7 +35,7 @@ public class CardInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         cardDescription.text = incomingDescription;
         cardAbility = incomingAbility;
     }
-    
+
     public void ApplyPowerUp()
     {
         PowerUpType abilityPower = cardAbility.ReturnType();
@@ -47,6 +49,7 @@ public class CardInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 player.GetComponent<PlayerFiring>().bulletUpgrades.Add(cardAbility);
                 break;
             case PowerUpType.TIME:
+                cardAbility.ApplyPowerUp(player);
                 break;
             case PowerUpType.HEALTH:
                 break;

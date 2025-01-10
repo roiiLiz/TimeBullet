@@ -5,12 +5,27 @@ using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
 {
-    
-    private void OnEnable() { PlayerDeathComponent.playerDied += InitiateGameOver; }
-    private void OnDisable() { PlayerDeathComponent.playerDied -= InitiateGameOver; }
+    [SerializeField]
+    private GameObject gameOverScreen;
+
+    private void OnEnable() { PlayerDeathComponent.playerDied += InitiateGameOver; UI_Button.levelRetry += InitiateCleanup; }
+    private void OnDisable() { PlayerDeathComponent.playerDied -= InitiateGameOver; UI_Button.levelRetry += InitiateCleanup; }
+
+    private void InitiateCleanup()
+    {
+        StartCoroutine(CleanUpGameOver());
+    }
+
+    private IEnumerator CleanUpGameOver()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        gameOverScreen.SetActive(false);
+        Time.timeScale = 1f;
+    }
 
     private void InitiateGameOver()
     {
-        Debug.Log("Game Over :D");
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

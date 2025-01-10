@@ -17,24 +17,61 @@ public class CreateCards : MonoBehaviour
     private int cardsToGenerate = 3;
     [SerializeField]
     private int cardXSpacing = 350;
-
-    private bool reroll = false;
     
-    private void OnEnable() {  PlayerEXP.levelUp += GenerateCards; }
-    private void OnDisable() {  PlayerEXP.levelUp -= GenerateCards; }
+    private List<int> randomCards = new List<int>();
+    private bool keepGenerating;
+    private int selectableCards = 0;
+
+    private void OnEnable() {  PlayerEXP.levelUp += GenerateCards; TimeUpgrade.removeTimeSelection += RemovePowerUp; }
+    private void OnDisable() {  PlayerEXP.levelUp -= GenerateCards; TimeUpgrade.removeTimeSelection -= RemovePowerUp; }
+
+    private void RemovePowerUp(string powerUpToRemove)
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            if (cards[i].powerUp.name == powerUpToRemove)
+            {
+                cards[i].selectable = false;
+            }
+        }
+    }
+
+    private void GenerateRandomSelection(int selectionCount)
+    {
+        randomCards.Clear();
+        
+        keepGenerating = true;
+        while (keepGenerating)
+        {
+            int randomSelection = UnityEngine.Random.Range(0, cards.Count);
+            if (randomCards.Contains(randomSelection) == false && cards[randomSelection].selectable == true)
+            {
+                Debug.Log($"Adding to Selection: {randomSelection}");
+                randomCards.Add(randomSelection);
+            }
+
+            if (randomCards.Count == selectionCount)
+            {
+                keepGenerating = false;
+            }
+        }
+        
+    }
 
     private void GenerateCards()
     {
-        for (int i = 0; i < cardsToGenerate; i++)
+        GenerateRandomSelection(cardsToGenerate);
+
+        for (int i = 0; i < randomCards.Count; i++)
         {
-            int randomCard = UnityEngine.Random.Range(0, cards.Count - 1);
+            // int randomCard = UnityEngine.Random.Range(0, cards.Count - 1);
 
             GameObject newCard = Instantiate(cardPrefab);
             newCard.transform.SetParent(cardPanel);
             newCard.transform.localScale = new Vector3(1, 1, 1);
             newCard.transform.localPosition = new Vector3((i + 2 - cardsToGenerate) * cardXSpacing, 0, 0);
 
-            newCard.GetComponent<CardInfo>().SetCard(cards[randomCard].image, cards[randomCard].title, cards[randomCard].description, cards[randomCard].powerUp);
+            newCard.GetComponent<CardInfo>().SetCard(cards[randomCards[i]].image, cards[randomCards[i]].title, cards[randomCards[i]].description, cards[randomCards[i]].powerUp);
         }
     }
 }
@@ -47,4 +84,5 @@ public class Card
     [TextArea(5, 10)]
     public string description;
     public BasePowerUp powerUp;
+    public bool selectable = true;
 }

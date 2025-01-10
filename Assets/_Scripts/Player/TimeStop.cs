@@ -20,13 +20,16 @@ public class TimeStop : MonoBehaviour
     public static event Action<float, float> abilityProgress;
     public static event Action<float, float> cooldownBegin; 
 
-    public float slowDownScale = 0.25f;
-    [SerializeField] float defaultSpeed = 1f;
-    [SerializeField] float powerDuration = 5f;
-    [SerializeField] float powerCooldownTime = 2f;
+    public float slowDownScale = 0.5f;
+    [SerializeField] 
+    private float defaultSpeed = 1f;
+    [SerializeField] 
+    private float powerDuration = 5f;
+    [SerializeField] 
+    private float powerCooldownTime = 2f;
 
-    float internalPowerTime;
-    float internalCooldown;
+    private float internalPowerTime;
+    private float internalCooldown;
     TimeState currentTimeState = TimeState.Idle;
 
     void OnEnable() { Enemy.requestTime += ReturnTime; }
