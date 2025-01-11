@@ -6,5 +6,5 @@ public interface IEntityMoveable
 
     void MoveTowards(Vector2 direction);
 
-    void DetermineFacingDirection(Vector2 direction);
+    void DetermineFacingDirection(Vector2 direction, SpriteRenderer spriteRenderer);
 }

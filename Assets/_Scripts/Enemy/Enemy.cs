@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour, IDamagable, IEntityMoveable
         return Mathf.Abs(Vector3.Distance(player.transform.position, transform.position));
     }
 
-    public void DetermineFacingDirection(Vector2 direction)
+    public void DetermineFacingDirection(Vector2 direction, SpriteRenderer sprite)
     {
         if (sprite == null) 
         { 

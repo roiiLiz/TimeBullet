@@ -18,6 +18,9 @@ public class RangedEnemy : Enemy
     private bool canFire = true;
     private float weaponCooldown = 0f;
 
+    private Animator animator => GetComponent<Animator>();
+    private SpriteRenderer sprite => GetComponent<SpriteRenderer>();
+
     private void Update()
     {
         if (base.customTimeScale == 0f)
@@ -32,6 +35,7 @@ public class RangedEnemy : Enemy
             if (canFire)
             {
                 FireBullet();
+                animator.SetFloat("xVelocity", 0f);
             } else
             {
                 ManageWeaponCooldown();
@@ -40,6 +44,10 @@ public class RangedEnemy : Enemy
         else
         {
             base.MoveTowards(base.DirectionToPlayer());
+
+            base.DetermineFacingDirection(base.DirectionToPlayer(), sprite);
+
+            animator.SetFloat("xVelocity", 1f);
         }
     }
 
