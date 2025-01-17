@@ -16,7 +16,7 @@ The main goal of this project is to take a deeper dive into several mechanics an
 
 - [kenney - 1-bit Asset Pack](https://www.kenney.nl/assets/1-bit-pack)
 - [Rgsdev - Top Down Tileset](https://rgsdev.itch.io/free-cc0-top-down-tileset-template-pixel-art)
-- [Pixelfy Font](https://fonts.google.com/specimen/Pixelify+Sans)
+- [Font](https://www.dafont.com/minecraft.font)
 - [Liz Thompson - Player Character + Enemy Sprites](https://roiiliz.github.io/)
 
 ### Programming
