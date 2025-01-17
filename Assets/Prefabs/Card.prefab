@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40d6c313348d9ad4692cabce6f5f8499, type: 2}
-  m_sharedMaterial: {fileID: 7947823146433911024, guid: 40d6c313348d9ad4692cabce6f5f8499, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b7dc6bdf819dff41be54fc9af361560, type: 2}
+  m_sharedMaterial: {fileID: -7191255164413272558, guid: 6b7dc6bdf819dff41be54fc9af361560, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -276,8 +276,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40d6c313348d9ad4692cabce6f5f8499, type: 2}
-  m_sharedMaterial: {fileID: 7947823146433911024, guid: 40d6c313348d9ad4692cabce6f5f8499, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b7dc6bdf819dff41be54fc9af361560, type: 2}
+  m_sharedMaterial: {fileID: -7191255164413272558, guid: 6b7dc6bdf819dff41be54fc9af361560, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -439,6 +439,7 @@ MonoBehaviour:
   cardTitle: {fileID: 2068282859271188595}
   cardDescription: {fileID: 1082820511118760799}
   cardAbility: {fileID: 0}
+  selectable: 1
 --- !u!114 &2195419621698780904
 MonoBehaviour:
   m_ObjectHideFlags: 0
